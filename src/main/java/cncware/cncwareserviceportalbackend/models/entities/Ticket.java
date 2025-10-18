@@ -28,4 +28,8 @@ public class Ticket {
 
     @OneToMany(mappedBy = "ticket")
     private List<Message> messages = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
 }
