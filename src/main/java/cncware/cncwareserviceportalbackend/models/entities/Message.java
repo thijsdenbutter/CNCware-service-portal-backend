@@ -1,9 +1,6 @@
 package cncware.cncwareserviceportalbackend.models.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,4 +17,8 @@ public class Message {
     private int id;
     private String content;
     private LocalDateTime timestamp;
+
+    @ManyToOne
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
 }
