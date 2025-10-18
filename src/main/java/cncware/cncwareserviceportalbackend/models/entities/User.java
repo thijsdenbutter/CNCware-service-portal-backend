@@ -1,10 +1,7 @@
 package cncware.cncwareserviceportalbackend.models.entities;
 
 import cncware.cncwareserviceportalbackend.models.enums.Role;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,4 +17,8 @@ public class User {
     private String email;
     private String password;
     private Role role;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 }
