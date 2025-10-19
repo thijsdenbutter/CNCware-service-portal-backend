@@ -9,16 +9,17 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "messages")
-public class Message {
+@Table(name = "timers")
+public class Timer {
 
     @Id
     @GeneratedValue
     private int id;
-    private String content;
-    private LocalDateTime timestamp;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private long durationInSeconds;
+    private boolean active;
 
-    @ManyToOne
-    @JoinColumn(name = "ticket_id")
+    @OneToOne(mappedBy = "timer")
     private Ticket ticket;
 }

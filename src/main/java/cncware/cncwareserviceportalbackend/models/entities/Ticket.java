@@ -1,13 +1,12 @@
 package cncware.cncwareserviceportalbackend.models.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,4 +21,19 @@ public class Ticket {
     private String description;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "ticket")
+    private List<Message> messages = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
+
+    @OneToOne
+    @JoinColumn(name = "timer_id")
+    private Timer timer;
 }

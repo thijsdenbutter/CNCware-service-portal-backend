@@ -1,11 +1,11 @@
 package cncware.cncwareserviceportalbackend.models.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -18,4 +18,6 @@ public class Status {
     private int id;
     private String label;
 
+    @OneToMany(mappedBy = "status")
+    private List<Ticket> tickets = new ArrayList<>();
 }
