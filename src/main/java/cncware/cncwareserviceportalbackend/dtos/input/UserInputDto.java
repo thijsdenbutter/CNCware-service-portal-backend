@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserInputDto {
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email address")
+    @NotBlank(message = "Email is required.")
+    @Email(message = "Invalid email address.")
     private String email;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 8, message = "Password must be at least 8 characters long")
+    @NotBlank(message = "Password is required.")
+    @Size(min = 8, message = "Password must be at least 8 characters long.")
     private String password;
     private Role role;
 }
