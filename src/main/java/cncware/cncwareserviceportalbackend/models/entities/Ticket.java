@@ -32,4 +32,8 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
+
+    @OneToOne
+    @JoinColumn(name = "timer_id")
+    private Timer timer;
 }

@@ -1,9 +1,6 @@
 package cncware.cncwareserviceportalbackend.models.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,4 +19,7 @@ public class Timer {
     private LocalDateTime endTime;
     private long durationInSeconds;
     private boolean active;
+
+    @OneToOne(mappedBy = "timer")
+    private Ticket ticket;
 }
