@@ -23,5 +23,8 @@ public class TimerInputDto {
     @PositiveOrZero(message = "Duration must be zero or a positive number.")
     private long durationInSeconds;
 
+    @NotNull(message = "Ticket id is required.")
+    private Integer ticketId;
+
     private boolean active;
 }
