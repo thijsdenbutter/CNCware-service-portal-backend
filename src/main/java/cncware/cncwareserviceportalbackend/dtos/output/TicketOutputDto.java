@@ -1,7 +1,5 @@
 package cncware.cncwareserviceportalbackend.dtos.output;
 
-import cncware.cncwareserviceportalbackend.dtos.output.MessageOutpuDto;
-import cncware.cncwareserviceportalbackend.dtos.output.StatusOutputDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +20,6 @@ public class TicketOutputDto {
     private int userId;
     private int timerId;
 
-    private List<MessageOutpuDto> messages = new ArrayList<>();
+    private List<MessageOutputDto> messages = new ArrayList<>();
     private StatusOutputDto status;
 }
