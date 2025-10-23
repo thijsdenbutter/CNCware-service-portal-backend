@@ -24,4 +24,7 @@ public class TicketInputDto {
 
     @PastOrPresent(message = "Update time cannot be in the future.")
     private LocalDateTime updatedAt;
+
+    private Integer userId;
+    private Integer statusId;
 }

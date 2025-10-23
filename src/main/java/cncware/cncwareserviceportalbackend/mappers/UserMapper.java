@@ -15,6 +15,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
+    // TODO: company, ticket en notification id's oplossen in service laag.
     @Mapping(target = "companyId", source = "company.id")
     @Mapping(target = "ticketIds", source = "tickets")
     @Mapping(target = "notificationIds", source = "notifications")
