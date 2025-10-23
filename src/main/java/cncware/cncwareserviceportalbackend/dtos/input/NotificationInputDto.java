@@ -19,5 +19,8 @@ public class NotificationInputDto {
     @PastOrPresent(message = "Creation time cannot be in the future.")
     private LocalDateTime createdAt;
 
+    @NotBlank(message = "User id is required.")
+    private Integer userId;
+
     private boolean read;
 }

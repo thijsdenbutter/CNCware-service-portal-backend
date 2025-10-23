@@ -5,7 +5,7 @@ import cncware.cncwareserviceportalbackend.dtos.output.StatusOutputDto;
 import cncware.cncwareserviceportalbackend.models.entities.Status;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface StatusMapper {
 
     StatusOutputDto toDto(Status entity);
