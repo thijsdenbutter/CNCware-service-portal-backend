@@ -27,7 +27,7 @@ public interface UserMapper {
 
     void updateEntity(UserInputDto dto, @MappingTarget User entity);
 
-    List<UserListDto> toDtoList(List<User> entities);
+    List<UserListDto> toList(List<User> entities);
 
     default List<Integer> getTicketIds (List<Ticket> tickets){
         if (tickets == null) return null;
