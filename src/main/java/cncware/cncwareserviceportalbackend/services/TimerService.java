@@ -2,7 +2,6 @@ package cncware.cncwareserviceportalbackend.services;
 
 import cncware.cncwareserviceportalbackend.dtos.input.TimerInputDto;
 import cncware.cncwareserviceportalbackend.dtos.output.TimerOutputDto;
-import cncware.cncwareserviceportalbackend.exceptions.types.ResourceNotFoundException;
 import cncware.cncwareserviceportalbackend.mappers.TimerMapper;
 import cncware.cncwareserviceportalbackend.models.entities.Timer;
 import cncware.cncwareserviceportalbackend.repositories.TimerRepository;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class TimerService {
+public class TimerService extends BaseService{
 
     private final TimerRepository timerRepository;
 
@@ -24,17 +23,13 @@ public class TimerService {
     }
 
     public TimerOutputDto getById(Integer id) {
-        Timer entity = timerRepository.findById(id)
-                .orElseThrow(()
-                -> new ResourceNotFoundException("Timer not found with id " + id));
+        Timer entity = findOrThrow(timerRepository, id, "timer");
 
         return timerMapper.toDto(entity);
     }
 
     public TimerOutputDto update(TimerInputDto dto, Integer id){
-        Timer entity = timerRepository.findById(id)
-                .orElseThrow(()
-                        -> new ResourceNotFoundException("Timer not found with id " + id));
+        Timer entity = findOrThrow(timerRepository, id, "timer");
 
         timerMapper.updateEntity(dto, entity);
         Timer updatedEntity = timerRepository.save(entity);
@@ -43,9 +38,7 @@ public class TimerService {
     }
 
     public void delete(Integer id){
-        Timer entity = timerRepository.findById(id)
-                .orElseThrow(()
-                        -> new ResourceNotFoundException("Timer not found with id " + id));
+        Timer entity = findOrThrow(timerRepository, id, "timer");
 
         timerRepository.delete(entity);
     }

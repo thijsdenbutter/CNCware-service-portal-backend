@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService extends BaseService{
 
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
@@ -36,17 +36,13 @@ public class UserService {
     }
 
     public UserOutputDto getById(Integer id){
-        User entity = userRepository.findById(id)
-                .orElseThrow(()
-                        -> new ResourceNotFoundException("User not found with id " + id));
+        User entity = findOrThrow(userRepository, id, "user");
 
         return userMapper.toDto(entity);
     }
 
     public UserOutputDto update(UserInputDto dto, Integer id){
-        User entity = userRepository.findById(id)
-                .orElseThrow(()
-                        -> new ResourceNotFoundException("User not found with id " + id));
+        User entity = findOrThrow(userRepository, id, "user");
 
         userMapper.updateEntity(dto, entity);
         User updatedEntity = userRepository.save(entity);
@@ -55,21 +51,14 @@ public class UserService {
     }
 
     public void delete(Integer id){
-        User entity = userRepository.findById(id)
-                .orElseThrow(()
-                        -> new ResourceNotFoundException("User not found with id " + id));
+        User entity = findOrThrow(userRepository, id, "user");
 
         userRepository.delete(entity);
     }
 
     public UserOutputDto assignCompanyToUser(Integer userId, Integer companyId){
-        User entity = userRepository.findById(userId)
-                .orElseThrow(()
-                        -> new ResourceNotFoundException("User not found with id " + userId));
-
-        Company companyEntity = companyRepository.findById(companyId)
-                .orElseThrow(()
-                        -> new ResourceNotFoundException("Company not found with id " + companyId));
+        User entity = findOrThrow(userRepository, userId, "user");
+        Company companyEntity = findOrThrow(companyRepository, companyId, "company");
 
         entity.setCompany(companyEntity);
         User updatedEntity = userRepository.save(entity);
