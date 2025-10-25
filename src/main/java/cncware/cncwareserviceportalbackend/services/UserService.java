@@ -43,7 +43,7 @@ public class UserService {
         return userMapper.toDto(entity);
     }
 
-    public UserOutputDto update(Integer id, UserInputDto dto){
+    public UserOutputDto update(UserInputDto dto, Integer id){
         User entity = userRepository.findById(id)
                 .orElseThrow(()
                         -> new ResourceNotFoundException("User not found with id " + id));
