@@ -6,16 +6,13 @@ import cncware.cncwareserviceportalbackend.dtos.output.UserOutputDto;
 import cncware.cncwareserviceportalbackend.models.entities.Notification;
 import cncware.cncwareserviceportalbackend.models.entities.Ticket;
 import cncware.cncwareserviceportalbackend.models.entities.User;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    // TODO: company, ticket en notification id's oplossen in service laag.
     @Mapping(target = "companyId", source = "company.id")
     @Mapping(target = "ticketIds", source = "tickets")
     @Mapping(target = "notificationIds", source = "notifications")
@@ -25,6 +22,7 @@ public interface UserMapper {
 
     User toEntity(UserInputDto dto);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntity(UserInputDto dto, @MappingTarget User entity);
 
     List<UserListDto> toList(List<User> entities);
