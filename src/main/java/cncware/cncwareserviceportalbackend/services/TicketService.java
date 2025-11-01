@@ -55,7 +55,7 @@ public class TicketService extends BaseService{
     public TicketOutputDto update(TicketInputDto dto, Integer id){
         Ticket entity = findOrThrow(ticketRepository, id, "Ticket");
 
-        ticketMapper.updateTicket(dto, entity);
+        ticketMapper.updateEntity(dto, entity);
         Ticket updatedEntity = ticketRepository.save(entity);
 
         return ticketMapper.toDto(updatedEntity);

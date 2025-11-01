@@ -19,7 +19,7 @@ public interface TicketMapper {
 
     TicketListDto toListDto(Ticket entity);
 
-    void updateTicket(TicketInputDto dto, @MappingTarget Ticket entity);
+    void updateEntity(TicketInputDto dto, @MappingTarget Ticket entity);
 
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "status", ignore = true)

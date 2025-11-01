@@ -4,6 +4,9 @@ import cncware.cncwareserviceportalbackend.dtos.input.StatusInputDto;
 import cncware.cncwareserviceportalbackend.dtos.output.StatusOutputDto;
 import cncware.cncwareserviceportalbackend.models.entities.Status;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface StatusMapper {
@@ -11,4 +14,8 @@ public interface StatusMapper {
     StatusOutputDto toDto(Status entity);
 
     Status toEntity(StatusInputDto dto);
+
+    void updateEntity(StatusInputDto dto, @MappingTarget Status status);
+
+    List<StatusOutputDto> toList(List<Status> entities);
 }
