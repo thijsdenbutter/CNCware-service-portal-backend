@@ -58,4 +58,14 @@ public class NotificationService extends BaseService{
 
         notificationRepository.delete(entity);
     }
+
+    public NotificationOutputDto assignUserToNotification(Integer userId, Integer notificationId){
+        User userEntity = findOrThrow(userRepository, userId, "User");
+        Notification notificationEntity = findOrThrow(notificationRepository, notificationId, "Notification");
+
+        notificationEntity.setUser(userEntity);
+        Notification updatedEntity = notificationRepository.save(notificationEntity);
+
+        return notificationMapper.toDto(updatedEntity);
+    }
 }
