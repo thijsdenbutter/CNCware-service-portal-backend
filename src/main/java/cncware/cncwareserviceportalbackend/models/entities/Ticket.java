@@ -36,4 +36,5 @@ public class Ticket {
     @OneToOne
     @JoinColumn(name = "timer_id")
     private Timer timer;
+
 }

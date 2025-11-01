@@ -3,7 +3,6 @@ package cncware.cncwareserviceportalbackend.services;
 import cncware.cncwareserviceportalbackend.dtos.input.UserInputDto;
 import cncware.cncwareserviceportalbackend.dtos.list.UserListDto;
 import cncware.cncwareserviceportalbackend.dtos.output.UserOutputDto;
-import cncware.cncwareserviceportalbackend.exceptions.types.ResourceNotFoundException;
 import cncware.cncwareserviceportalbackend.mappers.UserMapper;
 import cncware.cncwareserviceportalbackend.models.entities.Company;
 import cncware.cncwareserviceportalbackend.models.entities.User;
@@ -36,13 +35,13 @@ public class UserService extends BaseService{
     }
 
     public UserOutputDto getById(Integer id){
-        User entity = findOrThrow(userRepository, id, "user");
+        User entity = findOrThrow(userRepository, id, "User");
 
         return userMapper.toDto(entity);
     }
 
     public UserOutputDto update(UserInputDto dto, Integer id){
-        User entity = findOrThrow(userRepository, id, "user");
+        User entity = findOrThrow(userRepository, id, "User");
 
         userMapper.updateEntity(dto, entity);
         User updatedEntity = userRepository.save(entity);
@@ -51,14 +50,14 @@ public class UserService extends BaseService{
     }
 
     public void delete(Integer id){
-        User entity = findOrThrow(userRepository, id, "user");
+        User entity = findOrThrow(userRepository, id, "User");
 
         userRepository.delete(entity);
     }
 
     public UserOutputDto assignCompanyToUser(Integer userId, Integer companyId){
-        User entity = findOrThrow(userRepository, userId, "user");
-        Company companyEntity = findOrThrow(companyRepository, companyId, "company");
+        User entity = findOrThrow(userRepository, userId, "User");
+        Company companyEntity = findOrThrow(companyRepository, companyId, "Company");
 
         entity.setCompany(companyEntity);
         User updatedEntity = userRepository.save(entity);

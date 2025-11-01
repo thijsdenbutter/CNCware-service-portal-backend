@@ -23,13 +23,13 @@ public class TimerService extends BaseService{
     }
 
     public TimerOutputDto getById(Integer id) {
-        Timer entity = findOrThrow(timerRepository, id, "timer");
+        Timer entity = findOrThrow(timerRepository, id, "Timer");
 
         return timerMapper.toDto(entity);
     }
 
     public TimerOutputDto update(TimerInputDto dto, Integer id){
-        Timer entity = findOrThrow(timerRepository, id, "timer");
+        Timer entity = findOrThrow(timerRepository, id, "Timer");
 
         timerMapper.updateEntity(dto, entity);
         Timer updatedEntity = timerRepository.save(entity);
@@ -38,7 +38,7 @@ public class TimerService extends BaseService{
     }
 
     public void delete(Integer id){
-        Timer entity = findOrThrow(timerRepository, id, "timer");
+        Timer entity = findOrThrow(timerRepository, id, "Timer");
 
         timerRepository.delete(entity);
     }
