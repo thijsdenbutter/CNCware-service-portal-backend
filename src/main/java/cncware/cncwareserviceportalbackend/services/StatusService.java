@@ -16,9 +16,9 @@ import java.util.List;
 public class StatusService extends BaseService{
 
     private final TimerMapper timerMapper;
-    StatusRepository statusRepository;
+    private final StatusRepository statusRepository;
 
-    StatusMapper statusMapper;
+    private final StatusMapper statusMapper;
 
     public StatusOutputDto create(StatusInputDto dto){
         Status entity = statusMapper.toEntity(dto);
@@ -38,7 +38,7 @@ public class StatusService extends BaseService{
         return statusMapper.toDto(entity);
     }
 
-    public StatusOutputDto update (StatusInputDto dto, Integer id){
+    public StatusOutputDto update(StatusInputDto dto, Integer id){
         Status entity = findOrThrow(statusRepository, id, "Status");
         statusMapper.updateEntity(dto, entity);
 
@@ -47,7 +47,7 @@ public class StatusService extends BaseService{
         return statusMapper.toDto(updatedEntity);
     }
 
-    public void delete (Integer id){
+    public void delete(Integer id){
         Status entity = findOrThrow(statusRepository, id, "Status");
 
         statusRepository.delete(entity);
