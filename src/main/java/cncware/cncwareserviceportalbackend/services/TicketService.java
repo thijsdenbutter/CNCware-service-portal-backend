@@ -23,14 +23,10 @@ public class TicketService extends BaseService{
     private final TicketMapper ticketMapper;
 
     public TicketOutputDto create(TicketInputDto dto){
-
         Ticket entity = ticketMapper.toEntity(dto);
 
-        Integer userId = dto.getUserId();
-        User userEntity = findOrThrow(userRepository, userId, "User");
-
-        Integer statusId = dto.getStatusId();
-        Status statusEntity = findOrThrow(statusRepository, statusId, "Status");
+        User userEntity = findOrThrow(userRepository, dto.getUserId(), "User");
+        Status statusEntity = findOrThrow(statusRepository, dto.getStatusId(), "Status");
 
         entity.setUser(userEntity);
         entity.setStatus(statusEntity);

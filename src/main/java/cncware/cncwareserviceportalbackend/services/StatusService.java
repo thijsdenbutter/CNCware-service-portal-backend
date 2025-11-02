@@ -15,7 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StatusService extends BaseService{
 
-    private final TimerMapper timerMapper;
     private final StatusRepository statusRepository;
 
     private final StatusMapper statusMapper;

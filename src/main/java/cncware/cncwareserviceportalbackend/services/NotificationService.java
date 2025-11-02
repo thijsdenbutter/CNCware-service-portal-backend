@@ -24,8 +24,7 @@ public class NotificationService extends BaseService{
     public NotificationOutputDto create(NotificationInputDto dto){
         Notification entity = notificationMapper.toEntity(dto);
 
-        Integer userId = dto.getUserId();
-        User userEntity = findOrThrow(userRepository, userId, "User");
+        User userEntity = findOrThrow(userRepository, dto.getUserId(), "User");
 
         entity.setUser(userEntity);
 
