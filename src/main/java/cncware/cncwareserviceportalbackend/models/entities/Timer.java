@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Timer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

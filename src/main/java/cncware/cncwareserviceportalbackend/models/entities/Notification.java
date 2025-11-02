@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Notification {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String message;
     private boolean read;

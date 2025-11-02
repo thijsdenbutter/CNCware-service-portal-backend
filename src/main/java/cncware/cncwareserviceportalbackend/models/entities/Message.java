@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Message {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String content;
     private LocalDateTime timestamp;
