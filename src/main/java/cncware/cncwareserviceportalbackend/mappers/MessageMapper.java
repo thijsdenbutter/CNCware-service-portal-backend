@@ -5,13 +5,19 @@ import cncware.cncwareserviceportalbackend.dtos.output.MessageOutputDto;
 import cncware.cncwareserviceportalbackend.models.entities.Message;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MessageMapper {
 
     MessageOutputDto toDto(Message entity);
 
-    // TODO: ticket oplossen in service laag oplossen.
     @Mapping(target = "ticket", ignore = true)
     Message toEntity(MessageInputDto dto);
+
+    void updateEntity(MessageInputDto dto, @MappingTarget Message entity);
+
+    List<MessageOutputDto> ToList(List<Message> entities);
 }
