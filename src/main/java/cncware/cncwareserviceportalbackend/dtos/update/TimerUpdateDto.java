@@ -1,4 +1,4 @@
-package cncware.cncwareserviceportalbackend.dtos.input;
+package cncware.cncwareserviceportalbackend.dtos.update;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class TimerInputDto {
+public class TimerUpdateDto {
 
     @NotNull(message = "Start time is required.")
     @PastOrPresent(message = "Start time cannot be in the future.")
@@ -22,9 +22,6 @@ public class TimerInputDto {
 
     @PositiveOrZero(message = "Duration must be zero or a positive number.")
     private long durationInSeconds;
-
-    @NotNull(message = "Ticket id is required.")
-    private Integer ticketId;
 
     private boolean active;
 }

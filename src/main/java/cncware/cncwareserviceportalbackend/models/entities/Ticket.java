@@ -33,8 +33,7 @@ public class Ticket {
     @JoinColumn(name = "status_id")
     private Status status;
 
-    @OneToOne
-    @JoinColumn(name = "timer_id")
+    @OneToOne(mappedBy = "ticket")
     private Timer timer;
 
 }

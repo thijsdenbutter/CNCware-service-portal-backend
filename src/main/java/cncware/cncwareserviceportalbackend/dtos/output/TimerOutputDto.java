@@ -14,6 +14,4 @@ public class TimerOutputDto {
     private LocalDateTime endTime;
     private long durationInSeconds;
     private boolean active;
-
-    private int ticketId;
 }

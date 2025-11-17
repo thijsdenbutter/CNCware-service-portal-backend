@@ -36,11 +36,11 @@ VALUES ('Jaarlijks onderhoud HSK-63F gereedschaphouder',
         '2025-11-02 14:30:00', '2025-11-02 14:30:00', 4, 3);
 
 -- 5.  timers
-INSERT INTO timers (start_time, end_time, duration_in_seconds, active)
-VALUES ('2025-11-02 14:00:00', '2025-11-02 15:00:00', 3600, false);
+INSERT INTO timers (start_time, end_time, duration_in_seconds, active, ticket_id)
+VALUES ('2025-11-02 14:00:00', '2025-11-02 15:00:00', 3600, false, 1);
 
-INSERT INTO timers (start_time, end_time, duration_in_seconds, active)
-VALUES ('2025-11-02 14:15:00', null, 0, true);
+INSERT INTO timers (start_time, end_time, duration_in_seconds, active, ticket_id)
+VALUES ('2025-11-02 14:15:00', null, 0, true, 2);
 
 -- 6.  messages
 INSERT INTO messages (content, timestamp, ticket_id)
