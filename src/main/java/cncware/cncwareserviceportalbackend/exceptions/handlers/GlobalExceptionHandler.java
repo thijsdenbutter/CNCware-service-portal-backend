@@ -1,6 +1,7 @@
 package cncware.cncwareserviceportalbackend.exceptions.handlers;
 
 import cncware.cncwareserviceportalbackend.exceptions.ApiError;
+import cncware.cncwareserviceportalbackend.exceptions.types.BusinessValidationException;
 import cncware.cncwareserviceportalbackend.exceptions.types.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -26,6 +27,18 @@ public class GlobalExceptionHandler {
         ApiError error = new ApiError(HttpStatus.NOT_FOUND, exception.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(BusinessValidationException.class)
+    public ResponseEntity<ApiError> handleBusinessValidation(BusinessValidationException exception,
+            HttpServletRequest request
+    ) {
+        ApiError error = new ApiError(
+                HttpStatus.BAD_REQUEST,
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
