@@ -15,7 +15,7 @@ public interface StatusMapper {
 
     Status toEntity(StatusInputDto dto);
 
-    void updateEntity(StatusInputDto dto, @MappingTarget Status status);
+    void updateEntity(@MappingTarget Status status, StatusInputDto dto);
 
     List<StatusOutputDto> toList(List<Status> entities);
 }

@@ -40,10 +40,10 @@ public class UserService extends BaseService{
         return userMapper.toDto(entity);
     }
 
-    public UserOutputDto update(UserInputDto dto, Integer id){
+    public UserOutputDto update(Integer id, UserInputDto dto){
         User entity = findOrThrow(userRepository, id, "User");
 
-        userMapper.updateEntity(dto, entity);
+        userMapper.updateEntity(entity, dto);
         User updatedEntity = userRepository.save(entity);
 
         return userMapper.toDto(updatedEntity);

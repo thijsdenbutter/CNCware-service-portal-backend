@@ -17,5 +17,5 @@ public interface TimerMapper {
     Timer toEntity(TimerInputDto dto);
 
     @Mapping(target = "ticket", ignore = true)
-    void updateEntity(TimerUpdateDto dto, @MappingTarget Timer entity);
+    void updateEntity(@MappingTarget Timer entity, TimerUpdateDto dto);
 }

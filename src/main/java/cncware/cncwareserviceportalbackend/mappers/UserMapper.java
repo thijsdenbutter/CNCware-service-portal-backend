@@ -23,7 +23,7 @@ public interface UserMapper {
     User toEntity(UserInputDto dto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntity(UserInputDto dto, @MappingTarget User entity);
+    void updateEntity(@MappingTarget User entity, UserInputDto dto);
 
     List<UserListDto> toList(List<User> entities);
 

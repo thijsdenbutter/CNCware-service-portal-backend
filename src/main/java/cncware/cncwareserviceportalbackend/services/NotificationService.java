@@ -43,9 +43,9 @@ public class NotificationService extends BaseService{
         return notificationMapper.toDto(entity);
     }
 
-    public NotificationOutputDto update(NotificationInputDto dto, Integer id){
+    public NotificationOutputDto update(Integer id, NotificationInputDto dto){
         Notification entity = findOrThrow(notificationRepository, id, "Notification");
-        notificationMapper.update(dto, entity);
+        notificationMapper.updateEntity(entity, dto);
 
         Notification updatedEntity = notificationRepository.save(entity);
 
@@ -58,7 +58,7 @@ public class NotificationService extends BaseService{
         notificationRepository.delete(entity);
     }
 
-    public NotificationOutputDto assignUserToNotification(Integer userId, Integer notificationId){
+    public NotificationOutputDto assignUserToNotification(Integer notificationId, Integer userId){
         User userEntity = findOrThrow(userRepository, userId, "User");
         Notification notificationEntity = findOrThrow(notificationRepository, notificationId, "Notification");
 

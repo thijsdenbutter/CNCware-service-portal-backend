@@ -3,7 +3,6 @@ package cncware.cncwareserviceportalbackend.services;
 import cncware.cncwareserviceportalbackend.dtos.input.StatusInputDto;
 import cncware.cncwareserviceportalbackend.dtos.output.StatusOutputDto;
 import cncware.cncwareserviceportalbackend.mappers.StatusMapper;
-import cncware.cncwareserviceportalbackend.mappers.TimerMapper;
 import cncware.cncwareserviceportalbackend.models.entities.Status;
 import cncware.cncwareserviceportalbackend.repositories.StatusRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,9 +36,9 @@ public class StatusService extends BaseService{
         return statusMapper.toDto(entity);
     }
 
-    public StatusOutputDto update(StatusInputDto dto, Integer id){
+    public StatusOutputDto update(Integer id, StatusInputDto dto){
         Status entity = findOrThrow(statusRepository, id, "Status");
-        statusMapper.updateEntity(dto, entity);
+        statusMapper.updateEntity(entity, dto);
 
         Status updatedEntity = statusRepository.save(entity);
 

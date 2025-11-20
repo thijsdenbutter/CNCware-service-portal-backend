@@ -48,10 +48,10 @@ public class TicketService extends BaseService{
         return ticketMapper.toDto(entity);
     }
 
-    public TicketOutputDto update(TicketInputDto dto, Integer id){
+    public TicketOutputDto update(Integer id, TicketInputDto dto){
         Ticket entity = findOrThrow(ticketRepository, id, "Ticket");
 
-        ticketMapper.updateEntity(dto, entity);
+        ticketMapper.updateEntity(entity, dto);
         Ticket updatedEntity = ticketRepository.save(entity);
 
         return ticketMapper.toDto(updatedEntity);
@@ -63,7 +63,7 @@ public class TicketService extends BaseService{
         ticketRepository.delete(entity);
     }
 
-    public TicketOutputDto assignUserToTicket(Integer userId, Integer ticketId){
+    public TicketOutputDto assignUserToTicket(Integer ticketId, Integer userId){
         User userEntity = findOrThrow(userRepository, userId, "User");
         Ticket ticketEntity = findOrThrow(ticketRepository, ticketId, "Ticket");
 
@@ -73,7 +73,7 @@ public class TicketService extends BaseService{
         return ticketMapper.toDto(updatedEntity);
     }
 
-    public TicketOutputDto assignTimerToTicket(Integer timerId, Integer ticketId){
+    public TicketOutputDto assignTimerToTicket(Integer ticketId, Integer timerId){
         Timer timerEntity = findOrThrow(timerRepository, timerId, "Timer");
         Ticket ticketEntity = findOrThrow(ticketRepository, ticketId, "Ticket");
 
@@ -83,7 +83,7 @@ public class TicketService extends BaseService{
         return ticketMapper.toDto(updatedEntity);
     }
 
-    public TicketOutputDto assignStatusToTicket(Integer statusId, Integer ticketId){
+    public TicketOutputDto assignStatusToTicket(Integer ticketId, Integer statusId){
         Status statusEntity = findOrThrow(statusRepository, statusId, "Status");
         Ticket ticketEntity = findOrThrow(ticketRepository, ticketId, "Ticket");
 

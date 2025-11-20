@@ -36,9 +36,9 @@ public class CompanyService extends BaseService{
         return companyMapper.toDto(entity);
     }
 
-    public CompanyOutputDto update(CompanyInputDto dto, Integer id){
+    public CompanyOutputDto update(Integer id, CompanyInputDto dto){
         Company entity = findOrThrow(companyRepository, id, "Company");
-        companyMapper.updateEntity(dto, entity);
+        companyMapper.updateEntity(entity, dto);
 
         Company updatedEntity = companyRepository.save(entity);
 

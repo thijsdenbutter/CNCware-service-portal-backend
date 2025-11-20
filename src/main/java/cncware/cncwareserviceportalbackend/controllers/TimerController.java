@@ -28,7 +28,7 @@ public class TimerController {
 
     @PutMapping("/{id}")
     public ResponseEntity<TimerOutputDto> update(@PathVariable Integer id, @Valid @RequestBody TimerUpdateDto dto){
-        return ResponseEntity.ok(timerService.update(dto, id));
+        return ResponseEntity.ok(timerService.update(id, dto));
     }
 
     @DeleteMapping("/{id}")
@@ -37,3 +37,4 @@ public class TimerController {
         return ResponseEntity.notFound().build();
     }
 }
+

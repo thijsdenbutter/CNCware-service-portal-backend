@@ -43,10 +43,10 @@ public class TimerService extends BaseService{
         return timerMapper.toDto(entity);
     }
 
-    public TimerOutputDto update(TimerUpdateDto dto, Integer id){
+    public TimerOutputDto update(Integer id, TimerUpdateDto dto){
         Timer entity = findOrThrow(timerRepository, id, "Timer");
 
-        timerMapper.updateEntity(dto, entity);
+        timerMapper.updateEntity(entity, dto);
         Timer updatedEntity = timerRepository.save(entity);
 
         return timerMapper.toDto(updatedEntity);
