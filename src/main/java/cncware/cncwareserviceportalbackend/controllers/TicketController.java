@@ -44,11 +44,20 @@ public class TicketController {
         ticketService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
     @PutMapping("/{id}/user")
     public ResponseEntity<TicketOutputDto> assignUserToTicket(@PathVariable Integer id, @Valid @RequestBody IdInputDto dto){
         return ResponseEntity.ok(ticketService.assignUserToTicket(id, dto.getId()));
     }
 
-            //TODO: assigns afmaken
+    @PutMapping("/{id}/timer")
+    public ResponseEntity<TicketOutputDto> assignTimerToTicket(@PathVariable Integer id, @Valid @RequestBody IdInputDto dto){
+        return ResponseEntity.ok(ticketService.assignTimerToTicket(id, dto.getId()));
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<TicketOutputDto> assignStatusToTicket(@PathVariable Integer id, @Valid @RequestBody IdInputDto dto){
+        return ResponseEntity.ok(ticketService.assignStatusToTicket(id, dto.getId()));
+    }
 
 }
