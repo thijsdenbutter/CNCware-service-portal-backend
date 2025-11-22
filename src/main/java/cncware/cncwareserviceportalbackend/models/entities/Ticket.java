@@ -15,7 +15,7 @@ import java.util.List;
 public class Ticket {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     private String description;
@@ -33,8 +33,7 @@ public class Ticket {
     @JoinColumn(name = "status_id")
     private Status status;
 
-    @OneToOne
-    @JoinColumn(name = "timer_id")
+    @OneToOne(mappedBy = "ticket")
     private Timer timer;
 
 }

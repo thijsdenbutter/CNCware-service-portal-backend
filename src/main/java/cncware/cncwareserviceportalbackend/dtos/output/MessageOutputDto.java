@@ -12,4 +12,6 @@ public class MessageOutputDto {
     private int id;
     private String content;
     private LocalDateTime timestamp;
+
+    private Integer ticketId;
 }

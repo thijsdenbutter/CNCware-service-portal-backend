@@ -19,6 +19,6 @@ public class MessageInputDto {
     @PastOrPresent(message = "Timestamp cannot be in the future.")
     private LocalDateTime timestamp;
 
-    @NotBlank(message = "Ticket id is required.")
-    private int ticketId;
+    @NotNull(message = "Ticket id is required.")
+    private Integer ticketId;
 }

@@ -42,9 +42,9 @@ public class MessageService extends BaseService {
         return messageMapper.toDto(entity);
     }
 
-    public MessageOutputDto update(MessageInputDto dto, Integer id){
+    public MessageOutputDto update(Integer id, MessageInputDto dto){
         Message entity = findOrThrow(messageRepository, id, "Message");
-        messageMapper.updateEntity(dto, entity);
+        messageMapper.updateEntity(entity, dto);
 
         Message updatedEntity = messageRepository.save(entity);
 
@@ -57,7 +57,7 @@ public class MessageService extends BaseService {
         messageRepository.delete(entity);
     }
 
-    public MessageOutputDto assignTicketToMessage(Integer ticketId, Integer messageId){
+    public MessageOutputDto assignTicketToMessage(Integer messageId, Integer ticketId){
         Ticket ticketEntity = findOrThrow(ticketRepository, ticketId, "Ticket");
         Message messageEntity = findOrThrow(messageRepository, messageId, "Message");
 

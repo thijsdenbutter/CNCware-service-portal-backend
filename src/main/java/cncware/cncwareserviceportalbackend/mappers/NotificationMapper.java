@@ -18,7 +18,7 @@ public interface NotificationMapper {
     @Mapping(target = "user", ignore = true)
     Notification toEntity(NotificationInputDto dto);
 
-    void update(NotificationInputDto dto, @MappingTarget Notification entity);
+    void updateEntity(@MappingTarget Notification entity, NotificationInputDto dto);
 
     List<NotificationOutputDto> toList(List<Notification> entities);
 }

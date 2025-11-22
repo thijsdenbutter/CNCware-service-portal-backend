@@ -9,17 +9,19 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "timers")
+@Table(name = "timers",
+uniqueConstraints = @UniqueConstraint(columnNames = "ticket_id"))
 public class Timer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private long durationInSeconds;
     private boolean active;
 
-    @OneToOne(mappedBy = "timer")
+    @OneToOne
+    @JoinColumn(name = "ticket_id")
     private Ticket ticket;
 }

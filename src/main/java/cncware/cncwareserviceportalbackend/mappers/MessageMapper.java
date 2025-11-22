@@ -12,12 +12,13 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface MessageMapper {
 
+    @Mapping(target = "ticketId", source = "ticket.id")
     MessageOutputDto toDto(Message entity);
 
     @Mapping(target = "ticket", ignore = true)
     Message toEntity(MessageInputDto dto);
 
-    void updateEntity(MessageInputDto dto, @MappingTarget Message entity);
+    void updateEntity(@MappingTarget Message entity, MessageInputDto dto);
 
     List<MessageOutputDto> ToList(List<Message> entities);
 }

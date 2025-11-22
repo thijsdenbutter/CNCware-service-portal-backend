@@ -21,7 +21,7 @@ public interface CompanyMapper {
 
     Company toEntity(CompanyInputDto dto);
 
-    void updateEntity(CompanyInputDto dto, @MappingTarget Company entity);
+    void updateEntity(@MappingTarget Company entity, CompanyInputDto dto);
 
     List<CompanyListDto> toList(List<Company> entities);
 
