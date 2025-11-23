@@ -3,6 +3,7 @@ package cncware.cncwareserviceportalbackend.services;
 import cncware.cncwareserviceportalbackend.dtos.input.UserInputDto;
 import cncware.cncwareserviceportalbackend.dtos.list.UserListDto;
 import cncware.cncwareserviceportalbackend.dtos.output.UserOutputDto;
+import cncware.cncwareserviceportalbackend.exceptions.types.BusinessValidationException;
 import cncware.cncwareserviceportalbackend.mappers.UserMapper;
 import cncware.cncwareserviceportalbackend.models.entities.Company;
 import cncware.cncwareserviceportalbackend.models.entities.User;
@@ -23,6 +24,13 @@ public class UserService extends BaseService{
     private final UserMapper userMapper;
 
     public UserOutputDto create(UserInputDto dto){
+
+        if (userRepository.findByEmail(dto.getEmail()).isPresent()) {
+            throw new BusinessValidationException(
+                    "A user with this email already exists."
+            );
+        }
+
         User entity = userRepository.save(userMapper.toEntity(dto));
 
         return userMapper.toDto(entity);

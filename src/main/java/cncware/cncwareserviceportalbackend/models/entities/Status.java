@@ -18,6 +18,8 @@ public class Status {
     private int id;
     private String label;
 
-    @OneToMany(mappedBy = "status")
+    @OneToMany(mappedBy = "status",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<Ticket> tickets = new ArrayList<>();
 }

@@ -26,14 +26,18 @@ public class Ticket {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "ticket")
+    @OneToMany(mappedBy = "ticket",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<Message> messages = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
 
-    @OneToOne(mappedBy = "ticket")
+    @OneToOne(mappedBy = "ticket",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private Timer timer;
 
 }
