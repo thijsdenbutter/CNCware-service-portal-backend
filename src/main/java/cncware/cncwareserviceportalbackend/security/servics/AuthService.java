@@ -1,8 +1,12 @@
 package cncware.cncwareserviceportalbackend.security.servics;
 
+import cncware.cncwareserviceportalbackend.exceptions.types.BusinessValidationException;
 import cncware.cncwareserviceportalbackend.models.entities.User;
+import cncware.cncwareserviceportalbackend.models.enums.Role;
 import cncware.cncwareserviceportalbackend.repositories.UserRepository;
 import cncware.cncwareserviceportalbackend.security.jwt.JwtTokenProvider;
+import cncware.cncwareserviceportalbackend.security.payload.AuthenticationRequest;
+import cncware.cncwareserviceportalbackend.security.payload.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,25 +22,34 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public String login(String email, String rawPassword){
+    public String login(AuthenticationRequest request){
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+        } catch (Exception ex) {
+            throw new BusinessValidationException("Invalid credentials.");
+        }
 
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, rawPassword)
-        );
-
-        User user = userRepository.findByEmail(email)
-                .orElseThrow();
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new BusinessValidationException("Invalid credentials."));
 
         return jwtTokenProvider.generateToken(user.getEmail());
     }
 
-    public User register(User user){
+    public User register(RegisterRequest request){
 
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Email already in use.");
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new BusinessValidationException("A user with this email already exists.");
         }
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(Role.USER);
 
         return userRepository.save(user);
     }

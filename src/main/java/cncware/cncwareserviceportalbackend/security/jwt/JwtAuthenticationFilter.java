@@ -1,5 +1,6 @@
 package cncware.cncwareserviceportalbackend.security.jwt;
 
+import cncware.cncwareserviceportalbackend.security.handlers.CustomAuthenticationEntryPoint;
 import cncware.cncwareserviceportalbackend.security.servics.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -7,8 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -20,27 +23,44 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final CustomUserDetailsService customUserDetailsService;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        String authHeader = request.getHeader("Authorization");
+        try {
 
-        if(authHeader != null && authHeader.startsWith("Bearer ")){
-            String token = authHeader.substring(7);
+            String authHeader = request.getHeader("Authorization");
 
-            if(jwtTokenProvider.validateToken(token)){
-                String username = jwtTokenProvider.getUsernameFromToken(token);
-                UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+            if(authHeader != null && authHeader.startsWith("Bearer ")){
+                String token = authHeader.substring(7);
 
-                UsernamePasswordAuthenticationToken auth =
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                if(jwtTokenProvider.validateToken(token)){
+                    String username = jwtTokenProvider.getUsernameFromToken(token);
+                    UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
 
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                    UsernamePasswordAuthenticationToken auth =
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
             }
-        }
 
-        filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response);
+
+        } catch (UsernameNotFoundException ex){
+            customAuthenticationEntryPoint.commence(
+                    request,
+                    response,
+                    new AuthenticationException("User not found", ex) {}
+            );
+        } catch (Exception ex) {
+            customAuthenticationEntryPoint.commence(
+                    request,
+                    response,
+                    new AuthenticationException("Invalid token", ex) {}
+            );
+        }
     }
 }

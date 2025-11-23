@@ -25,6 +25,9 @@ public class TicketInputDto {
     @PastOrPresent(message = "Update time cannot be in the future.")
     private LocalDateTime updatedAt;
 
+    @NotNull(message = "User id is required.")
     private Integer userId;
+
+    @NotNull(message = "Status id is required.")
     private Integer statusId;
 }

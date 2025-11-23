@@ -14,10 +14,10 @@ INSERT INTO companies (name, industry) VALUES ('HoutCrafters BV', 'Massief-houte
 INSERT INTO companies (name, industry) VALUES ('ToolService Nederland', 'Onderhoud CNC-gereedschappen');
 
 -- 3.  users
-INSERT INTO users (email, password, role, company_id) VALUES ('peter@fineermeubel.nl',   'cnc123', 'ADMIN',      1);
-INSERT INTO users (email, password, role, company_id) VALUES ('marie@fineermeubel.nl',   'cnc123', 'USER',       1);
-INSERT INTO users (email, password, role, company_id) VALUES ('wim@houtcrafters.nl',     'cnc123', 'USER',       2);
-INSERT INTO users (email, password, role, company_id) VALUES ('sanne@toolservice.nl',    'cnc123', 'CONSULTANT', 3);
+INSERT INTO users (email, password, role, company_id) VALUES ('peter@fineermeubel.nl',   '$2a$10$2LH1iDiTZruk0Nj1wwlsTuJzC.5JISUp/jazamQ0xAhdEBGGM6aCK', 'ADMIN',      1);
+INSERT INTO users (email, password, role, company_id) VALUES ('marie@fineermeubel.nl',   '$2a$10$2LH1iDiTZruk0Nj1wwlsTuJzC.5JISUp/jazamQ0xAhdEBGGM6aCK', 'USER',       1);
+INSERT INTO users (email, password, role, company_id) VALUES ('wim@houtcrafters.nl',     '$2a$10$2LH1iDiTZruk0Nj1wwlsTuJzC.5JISUp/jazamQ0xAhdEBGGM6aCK', 'USER',       2);
+INSERT INTO users (email, password, role, company_id) VALUES ('sanne@toolservice.nl',    '$2a$10$2LH1iDiTZruk0Nj1wwlsTuJzC.5JISUp/jazamQ0xAhdEBGGM6aCK', 'CONSULTANT', 3);
 
 -- 4.  tickets
 INSERT INTO tickets (title, description, created_at, updated_at, user_id, status_id)
