@@ -6,6 +6,7 @@ import cncware.cncwareserviceportalbackend.dtos.output.CompanyOutputDto;
 import cncware.cncwareserviceportalbackend.services.CompanyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class CompanyController {
 
     @PostMapping
     public ResponseEntity<CompanyOutputDto> create(@Valid @RequestBody CompanyInputDto dto){
-        return ResponseEntity.ok(CompanyService.create(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(CompanyService.create(dto));
     }
 
     @GetMapping

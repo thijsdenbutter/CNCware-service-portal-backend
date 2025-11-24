@@ -7,6 +7,7 @@ import cncware.cncwareserviceportalbackend.dtos.output.TicketOutputDto;
 import cncware.cncwareserviceportalbackend.services.TicketService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class TicketController {
 
     @PostMapping
     public ResponseEntity<TicketOutputDto> create(@Valid @RequestBody TicketInputDto dto){
-        return ResponseEntity.ok(ticketService.create(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(ticketService.create(dto));
     }
 
     @GetMapping
