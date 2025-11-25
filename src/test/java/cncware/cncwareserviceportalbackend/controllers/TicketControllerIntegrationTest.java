@@ -72,7 +72,7 @@ public class TicketControllerIntegrationTest {
 
         assertThat(ticketRepository.count()).isEqualTo(1);
         assertThat(ticketRepository.findAll().get(0).getTitle()).isEqualTo("Help mijn test werkt niet");
-
-
     }
 }
+
+//TODO: User ophalen integratie test
