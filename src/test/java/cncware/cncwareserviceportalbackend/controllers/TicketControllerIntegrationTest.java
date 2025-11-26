@@ -1,4 +1,4 @@
-package cncware.cncwareserviceportalbackend;
+package cncware.cncwareserviceportalbackend.controllers;
 
 import cncware.cncwareserviceportalbackend.models.entities.User;
 import cncware.cncwareserviceportalbackend.models.enums.Role;
