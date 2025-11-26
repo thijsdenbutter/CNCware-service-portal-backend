@@ -5,6 +5,7 @@ import cncware.cncwareserviceportalbackend.dtos.output.StatusOutputDto;
 import cncware.cncwareserviceportalbackend.services.StatusService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class StatusController {
 
     @PostMapping
     public ResponseEntity<StatusOutputDto> create(@Valid @RequestBody StatusInputDto dto){
-        return ResponseEntity.ok(statusService.create(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(statusService.create(dto));
     }
 
     @GetMapping

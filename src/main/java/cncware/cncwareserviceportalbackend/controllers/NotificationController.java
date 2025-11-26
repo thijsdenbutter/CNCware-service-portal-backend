@@ -6,6 +6,7 @@ import cncware.cncwareserviceportalbackend.dtos.output.NotificationOutputDto;
 import cncware.cncwareserviceportalbackend.services.NotificationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,8 @@ public class NotificationController {
 
     @PostMapping
     public ResponseEntity<NotificationOutputDto> create(@Valid @RequestBody NotificationInputDto dto){
-        return ResponseEntity.ok(notificationService.create(dto));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(notificationService.create(dto));
     }
 
     @GetMapping

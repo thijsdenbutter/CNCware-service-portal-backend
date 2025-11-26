@@ -6,6 +6,7 @@ import cncware.cncwareserviceportalbackend.dtos.update.TimerUpdateDto;
 import cncware.cncwareserviceportalbackend.services.TimerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class TimerController {
 
     @PostMapping
     public ResponseEntity<TimerOutputDto> create(@Valid @RequestBody TimerInputDto dto){
-        return ResponseEntity.ok(timerService.create(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(timerService.create(dto));
     }
 
     @GetMapping("/{id}")

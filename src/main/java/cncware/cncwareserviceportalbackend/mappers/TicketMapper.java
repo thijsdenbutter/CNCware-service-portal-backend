@@ -19,6 +19,7 @@ public interface TicketMapper {
 
     TicketListDto toListDto(Ticket entity);
 
+    @Mapping(target = "createdAt", ignore = true)
     void updateEntity(@MappingTarget Ticket entity, TicketInputDto dto);
 
     @Mapping(target = "user", ignore = true)

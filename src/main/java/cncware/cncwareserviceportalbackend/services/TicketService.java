@@ -9,6 +9,7 @@ import cncware.cncwareserviceportalbackend.repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,11 +26,13 @@ public class TicketService extends BaseService{
     public TicketOutputDto create(TicketInputDto dto){
         Ticket entity = ticketMapper.toEntity(dto);
 
+
         User userEntity = findOrThrow(userRepository, dto.getUserId(), "User");
         Status statusEntity = findOrThrow(statusRepository, dto.getStatusId(), "Status");
 
         entity.setUser(userEntity);
         entity.setStatus(statusEntity);
+        entity.setCreatedAt(LocalDateTime.now());
 
         Ticket savedEntity = ticketRepository.save(entity);
 
@@ -52,7 +55,11 @@ public class TicketService extends BaseService{
         Ticket entity = findOrThrow(ticketRepository, id, "Ticket");
 
         ticketMapper.updateEntity(entity, dto);
+
+        entity.setUpdatedAt(LocalDateTime.now());
+
         Ticket updatedEntity = ticketRepository.save(entity);
+
 
         return ticketMapper.toDto(updatedEntity);
     }
