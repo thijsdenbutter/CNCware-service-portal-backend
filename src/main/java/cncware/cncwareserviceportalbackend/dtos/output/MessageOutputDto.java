@@ -13,5 +13,10 @@ public class MessageOutputDto {
     private String content;
     private LocalDateTime timestamp;
 
+    private boolean hasAttachment;
+    private String attachmentName;
+    private String attachmentType;
+    private long attachmentSize;
+
     private Integer ticketId;
 }
