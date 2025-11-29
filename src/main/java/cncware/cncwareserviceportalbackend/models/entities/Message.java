@@ -18,6 +18,13 @@ public class Message {
     private String content;
     private LocalDateTime timestamp;
 
+    @Column(name = "attachment_data")
+    private byte[] attachmentData;
+
+    private String attachmentName;
+    private String attachmentType;
+    private Long attachmentSize;
+
     @ManyToOne
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;

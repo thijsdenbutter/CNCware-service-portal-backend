@@ -9,7 +9,9 @@ import cncware.cncwareserviceportalbackend.repositories.MessageRepository;
 import cncware.cncwareserviceportalbackend.repositories.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -66,5 +68,35 @@ public class MessageService extends BaseService {
         Message updatedEntity = messageRepository.save(messageEntity);
 
         return messageMapper.toDto(updatedEntity);
+    }
+    public MessageOutputDto uploadAttachment(Integer id, MultipartFile file) {
+        Message entity = findOrThrow(messageRepository, id, "Message");
+
+        if (file == null || file.isEmpty()) {
+            throw new RuntimeException("No file was uploaded.");
+        }
+
+        try {
+            entity.setAttachmentData(file.getBytes());
+            entity.setAttachmentName(file.getOriginalFilename());
+            entity.setAttachmentType(file.getContentType());
+            entity.setAttachmentSize(file.getSize());
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to process attachment file.", e);
+        }
+
+        Message savedEntity = messageRepository.save(entity);
+        return messageMapper.toDto(savedEntity);
+    }
+
+    public byte[] downloadAttachment(Integer id) {
+        Message entity = findOrThrow(messageRepository, id, "Message");
+
+        if (entity.getAttachmentData() == null) {
+            throw new RuntimeException("This message has no attachment.");
+        }
+
+        return entity.getAttachmentData();
     }
 }

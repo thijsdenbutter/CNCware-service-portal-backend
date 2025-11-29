@@ -20,20 +20,17 @@ INSERT INTO users (email, password, role, company_id) VALUES ('wim@houtcrafters.
 INSERT INTO users (email, password, role, company_id) VALUES ('sanne@toolservice.nl',    '$2a$10$2LH1iDiTZruk0Nj1wwlsTuJzC.5JISUp/jazamQ0xAhdEBGGM6aCK', 'CONSULTANT', 3);
 
 -- 4.  tickets
-INSERT INTO tickets (title, description, created_at, updated_at, user_id, status_id)
+INSERT INTO tickets (title, description, user_id, status_id)
 VALUES ('Spindel loopt heet – Biesse Rover 324',
-        'Temperatuur > 68 °C na 15 min freeswerk op 18 mm MDF.',
-        '2025-11-02 14:00:00', '2025-11-02 14:00:00', 2, 1);
+        'Temperatuur > 68 °C na 15 min freeswerk op 18 mm MDF.', 2, 1);
 
-INSERT INTO tickets (title, description, created_at, updated_at, user_id, status_id)
+INSERT INTO tickets (title, description, user_id, status_id)
 VALUES ('Vacuümtafel verliest druk',
-        'Aluminium pods sluiten niet goed af; plaat verschuift tijdens graveerpad.',
-        '2025-11-02 14:15:00', '2025-11-02 14:15:00', 3, 2);
+        'Aluminium pods sluiten niet goed af; plaat verschuift tijdens graveerpad.', 3, 2);
 
-INSERT INTO tickets (title, description, created_at, updated_at, user_id, status_id)
+INSERT INTO tickets (title, description, user_id, status_id)
 VALUES ('Jaarlijks onderhoud HSK-63F gereedschaphouder',
-        'Magazijn 18 posities smeren, balcontrole, trekkracht meting.',
-        '2025-11-02 14:30:00', '2025-11-02 14:30:00', 4, 3);
+        'Magazijn 18 posities smeren, balcontrole, trekkracht meting.', 4, 3);
 
 -- 5.  timers
 INSERT INTO timers (start_time, end_time, duration_in_seconds, active, ticket_id)
