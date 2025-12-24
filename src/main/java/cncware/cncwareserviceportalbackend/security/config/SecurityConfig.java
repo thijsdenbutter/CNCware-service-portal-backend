@@ -49,9 +49,9 @@ public class SecurityConfig {
                         .requestMatchers("POST", "/messages/**").hasAnyRole("ADMIN", "USER", "CONSULTANT")
                         .requestMatchers("DELETE", "/messages/**").hasAnyRole("ADMIN", "CONSULTANT")
 
-                        .requestMatchers("GET", "/timers/**").hasAnyRole("ADMIN", "USER", "CONSULTANT")
-                        .requestMatchers("POST", "/timers").hasAnyRole("USER", "CONSULTANT")
-                        .requestMatchers("PUT", "/timers/**").hasAnyRole("USER", "CONSULTANT")
+                        .requestMatchers("GET", "/timers/**").hasAnyRole("ADMIN", "CONSULTANT")
+                        .requestMatchers("POST", "/timers").hasAnyRole("ADMIN", "CONSULTANT")
+                        .requestMatchers("PUT", "/timers/**").hasAnyRole("ADMIN", "CONSULTANT")
                         .requestMatchers("DELETE", "/timers/**").hasAnyRole("ADMIN", "CONSULTANT")
 
                         .requestMatchers("GET", "/notifications/**").hasAnyRole("ADMIN", "USER", "CONSULTANT")
