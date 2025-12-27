@@ -58,6 +58,7 @@ public class SecurityConfig {
 
                         .requestMatchers("GET", "/notifications/**").hasAnyRole("ADMIN", "USER", "CONSULTANT")
                         .requestMatchers("POST", "/notifications").hasAnyRole("ADMIN", "CONSULTANT")
+                        .requestMatchers("PUT", "/notifications").hasAnyRole("ADMIN", "CONSULTANT")
                         .requestMatchers("DELETE", "/notifications/**").hasRole("ADMIN")
 
                         .anyRequest().denyAll()
