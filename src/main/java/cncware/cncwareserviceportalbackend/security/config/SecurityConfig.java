@@ -35,12 +35,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/error").permitAll()
-                        .requestMatchers(
-                                "/swagger-ui.html",
-                                "/swagger-ui/**",
-                                "/v3/api-docs",
-                                "/v3/api-docs/**"
-                        ).permitAll()
 
                         .requestMatchers("/users/**").hasRole("ADMIN")
                         .requestMatchers("/companies/**").hasRole("ADMIN")
@@ -52,7 +46,9 @@ public class SecurityConfig {
                         .requestMatchers("PUT", "/tickets/**").hasAnyRole("ADMIN", "CONSULTANT")
                         .requestMatchers("DELETE", "/tickets/**").hasAnyRole("ADMIN", "CONSULTANT")
 
-                        .requestMatchers("POST", "/messages/**").hasAnyRole("ADMIN", "USER", "CONSULTANT")
+                        .requestMatchers("GET", "/messages/**").hasAnyRole("ADMIN", "USER", "CONSULTANT")
+                        .requestMatchers("POST", "/messages").hasAnyRole("ADMIN", "USER", "CONSULTANT")
+                        .requestMatchers("PUT", "/messages/**").hasAnyRole("ADMIN", "CONSULTANT")
                         .requestMatchers("DELETE", "/messages/**").hasAnyRole("ADMIN", "CONSULTANT")
 
                         .requestMatchers("GET", "/timers/**").hasAnyRole("ADMIN", "CONSULTANT")

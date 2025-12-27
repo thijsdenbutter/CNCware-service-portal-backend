@@ -6,7 +6,6 @@ import cncware.cncwareserviceportalbackend.models.enums.Role;
 import cncware.cncwareserviceportalbackend.repositories.StatusRepository;
 import cncware.cncwareserviceportalbackend.repositories.TicketRepository;
 import cncware.cncwareserviceportalbackend.repositories.UserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +35,6 @@ public class TicketControllerIntegrationTest {
 
     @Autowired
     private StatusRepository statusRepository;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     private int userId;
     private int statusId;

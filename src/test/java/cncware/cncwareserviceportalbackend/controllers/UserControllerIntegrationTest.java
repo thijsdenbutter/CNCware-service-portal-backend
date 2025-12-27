@@ -3,7 +3,6 @@ package cncware.cncwareserviceportalbackend.controllers;
 import cncware.cncwareserviceportalbackend.models.entities.User;
 import cncware.cncwareserviceportalbackend.repositories.UserRepository;
 
-import cncware.cncwareserviceportalbackend.security.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
