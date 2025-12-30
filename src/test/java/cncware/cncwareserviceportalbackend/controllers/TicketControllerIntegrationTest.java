@@ -1,16 +1,18 @@
 package cncware.cncwareserviceportalbackend.controllers;
 
+import cncware.cncwareserviceportalbackend.models.entities.Status;
 import cncware.cncwareserviceportalbackend.models.entities.User;
 import cncware.cncwareserviceportalbackend.models.enums.Role;
+import cncware.cncwareserviceportalbackend.repositories.StatusRepository;
 import cncware.cncwareserviceportalbackend.repositories.TicketRepository;
 import cncware.cncwareserviceportalbackend.repositories.UserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
+@ActiveProfiles("test")
 public class TicketControllerIntegrationTest {
 
     @Autowired
@@ -31,20 +34,27 @@ public class TicketControllerIntegrationTest {
     private UserRepository userRepository;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private StatusRepository statusRepository;
 
     private int userId;
+    private int statusId;
 
     @BeforeEach
     void setup(){
         ticketRepository.deleteAll();
         userRepository.deleteAll();
 
+        Status status = new Status();
+        status.setLabel("OPEN");
+        status = statusRepository.save(status);
+
         User user = new User();
         user.setEmail("test@cncware.nl");
         user.setPassword("encodedPassword");
         user.setRole(Role.USER);
         userId = userRepository.save(user).getId();
+
+        statusId = status.getId();
     }
 
     @Test
@@ -55,9 +65,9 @@ public class TicketControllerIntegrationTest {
                 "title" : "Help mijn test werkt niet",
                 "description" : "Ik probeer mijn software te testen met een test ticket maar mijn test ticket komt niet aan.",
                 "userId" : %d,
-                "statusId": 1
+                "statusId": %d
                 }
-                """.formatted(userId);
+                """.formatted(userId, statusId);
 
         mockMvc.perform(
                 post("/tickets")
@@ -75,4 +85,3 @@ public class TicketControllerIntegrationTest {
     }
 }
 
-//TODO: User ophalen integratie test
